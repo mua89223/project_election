@@ -1,1 +1,563 @@
 
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拍攝行程｜5/7-8</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: #f9f7f4;
+    color: #1a1a1a;
+  }
+
+  /* NAV */
+  .top-nav {
+    background: #fff;
+    border-bottom: 1px solid #e8e2d8;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-brand {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    padding: 16px 0;
+  }
+  .nav-links { display: flex; }
+  .nav-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: #aaa;
+    padding: 18px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-link:hover { color: #1a1a1a; }
+  .nav-link.active { color: #c8854a; border-bottom-color: #c8854a; }
+
+  /* STATS */
+  .stats-row {
+    display: flex;
+    gap: 48px;
+    padding: 40px 64px;
+    background: #fff;
+    border-bottom: 1px solid #e8e2d8;
+  }
+  .stat-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: #999; margin-top: 6px; letter-spacing: 0.05em; }
+
+  /* DAY TABS */
+  .day-tabs-bar {
+    background: #fff;
+    border-bottom: 1px solid #e8e2d8;
+    padding: 0 64px;
+    display: flex;
+  }
+  .day-tab {
+    padding: 18px 32px 18px 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #aaa;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+  .day-tab:hover { color: #1a1a1a; }
+  .day-tab.active { color: #c8854a; border-bottom-color: #c8854a; }
+
+  /* MAIN */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 64px 80px;
+    background: #f9f7f4;
+  }
+
+  .sec-intro { padding: 40px 0 0; }
+  .sec-num { font-size: 11px; letter-spacing: 0.3em; color: #c8854a; font-weight: 500; margin-bottom: 6px; }
+  .sec-heading { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .sec-sub { font-size: 12px; color: #aaa; font-weight: 300; }
+
+  /* SESSION BLOCK */
+  .sblock { background: #fff; border: 1px solid #e8e2d8; margin-top: 20px; }
+
+  .stop { display: flex; border-bottom: 1px solid #f0ece6; }
+
+  .tcol {
+    width: 140px;
+    flex-shrink: 0;
+    padding: 24px;
+    border-right: 1px solid #f0ece6;
+    background: #faf8f5;
+  }
+  .trange { font-family: 'Noto Serif TC', serif; font-size: 15px; font-weight: 700; color: #1a1a1a; line-height: 1.6; }
+  .tdur { font-size: 11px; color: #bbb; margin-top: 6px; }
+  .ttag {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    background: #f0ece6;
+    color: #888;
+    padding: 3px 8px;
+    font-weight: 500;
+  }
+
+  .titcol { flex: 1; padding: 24px 28px; }
+  .stitle { font-family: 'Noto Serif TC', serif; font-size: 19px; font-weight: 700; color: #1a1a1a; line-height: 1.4; margin-bottom: 6px; }
+  .stagline { font-size: 13px; color: #c8854a; font-weight: 500; }
+
+  .sbody { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .dcol { padding: 24px 28px; border-right: 1px solid #f0ece6; }
+  .dcol:last-child { border-right: none; }
+  .dcol.full { grid-column: 1 / -1; border-right: none; }
+
+  .dlabel { font-size: 10px; letter-spacing: 0.2em; color: #c8854a; font-weight: 500; margin-bottom: 8px; text-transform: uppercase; }
+  .dtext { font-size: 14px; color: #555; line-height: 1.9; font-weight: 300; }
+  .dtext strong { color: #1a1a1a; font-weight: 500; }
+
+  .dlist { list-style: none; }
+  .dlist li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    padding: 5px 0 5px 14px;
+    position: relative;
+    font-weight: 300;
+    border-bottom: 1px solid #f5f2ee;
+  }
+  .dlist li:last-child { border-bottom: none; }
+  .dlist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 5px;
+    height: 1px;
+    background: #c8854a;
+  }
+  .dlist li strong { color: #1a1a1a; font-weight: 500; }
+
+  /* OUTPUT */
+  .osec { padding: 20px 28px; border-top: 1px solid #f0ece6; background: #fdf9f5; }
+  .lfbadge {
+    display: flex;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid #e8e2d8;
+    border-left: 3px solid #c8854a;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .blabel { font-size: 10px; letter-spacing: 0.15em; color: #c8854a; font-weight: 500; }
+  .bdesc { font-size: 13px; color: #555; margin-top: 3px; font-weight: 300; }
+
+  .rrow { display: flex; gap: 10px; flex-wrap: wrap; }
+  .rpill {
+    background: #fff;
+    border: 1px solid #e8e2d8;
+    padding: 10px 14px;
+    flex: 1;
+    min-width: 150px;
+  }
+  .rn { font-size: 9px; color: #c8854a; letter-spacing: 0.2em; margin-bottom: 4px; }
+  .rt { font-size: 13px; color: #1a1a1a; font-weight: 500; font-family: 'Noto Serif TC', serif; }
+  .rd { font-size: 11px; color: #aaa; margin-top: 4px; line-height: 1.5; }
+
+  /* NOTE */
+  .nblock { padding: 14px 28px; border-top: 1px solid #f0ece6; background: #fffcf8; }
+  .ntxt { font-size: 12px; color: #999; line-height: 1.8; font-weight: 300; }
+  .ntxt strong { color: #555; font-weight: 500; }
+
+  /* QUESTIONS */
+  .qblock { padding: 16px 28px; border-top: 1px solid #f0ece6; background: #faf8f5; }
+  .qi { padding: 10px 0; font-size: 13px; color: #666; line-height: 1.8; border-bottom: 1px solid #f0ece6; font-style: italic; font-weight: 300; }
+  .qi:last-child { border-bottom: none; }
+
+  .gap { height: 14px; }
+
+  .day-section { display: none; }
+  .day-section.active { display: block; }
+
+  @media (max-width: 768px) {
+    .stats-row { padding: 28px 24px; gap: 28px; flex-wrap: wrap; }
+    .day-tabs-bar { padding: 0 24px; }
+    .main { padding: 0 24px 60px; }
+    .sbody { grid-template-columns: 1fr; }
+    .dcol { border-right: none; border-bottom: 1px solid #f0ece6; }
+    .dcol:last-child { border-bottom: none; }
+    .dcol.full { border-bottom: none; }
+    .rrow { flex-direction: column; }
+    .rpill { min-width: unset; }
+    .top-nav { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-brand">🎥 拍攝行程｜李伯利牧師</div>
+  <div class="nav-links">
+    <span class="nav-link active" onclick="sw('d1',this)">5月7日</span>
+    <span class="nav-link" onclick="sw('d2',this)">5月8日</span>
+  </div>
+</nav>
+
+<div class="stats-row">
+  <div><div class="stat-num">2</div><div class="stat-label">拍攝天數</div></div>
+  <div><div class="stat-num">7</div><div class="stat-label">拍攝場次</div></div>
+  <div><div class="stat-num">9+</div><div class="stat-label">Reels 預計產出</div></div>
+  <div><div class="stat-num">3</div><div class="stat-label">長片產出</div></div>
+</div>
+
+<div class="day-tabs-bar">
+  <div class="day-tab active" onclick="sw('d1',this)">5 月 7 日（三）</div>
+  <div class="day-tab" onclick="sw('d2',this)">5 月 8 日（四）</div>
+</div>
+
+<div class="main">
+
+  <!-- ===== DAY 1 ===== -->
+  <div class="day-section active" id="d1">
+
+    <div class="sec-intro">
+      <div class="sec-num">01</div>
+      <div class="sec-heading">個人專訪與生命故事紀錄</div>
+      <div class="sec-sub">13:00 – 16:30 ｜ 含燈光佈置與暖場</div>
+    </div>
+    <div class="sblock">
+      <div class="stop">
+        <div class="tcol">
+          <div class="trange">13:00<br>16:30</div>
+          <div class="tdur">3 – 4 小時</div>
+          <div class="ttag">INTERVIEW</div>
+        </div>
+        <div class="titcol">
+          <div class="stitle">個人專訪<br>與生命故事紀錄</div>
+          <div class="stagline">不談政見，談「轉變」</div>
+        </div>
+      </div>
+      <div class="sbody">
+        <div class="dcol">
+          <div class="dlabel">劇情大綱</div>
+          <div class="dtext">從過去的荒唐到現在的使命感，中間那段「為什麼要跳進政治這灘苦水」的掙扎。</div>
+        </div>
+        <div class="dcol">
+          <div class="dlabel">角色引導</div>
+          <div class="dtext"><strong>不看鏡頭</strong>，像在跟老朋友深夜對談。引導講述<strong>最挫折的時刻</strong>，而不是成功的時刻。</div>
+        </div>
+        <div class="dcol full">
+          <div class="dlabel">拍攝手法</div>
+          <ul class="dlist">
+            <li><strong>雙機作業</strong>：A機特寫眼神與手部細節</li>
+            <li>B機採中景，畫面保留較大比例陰影，營造電影感的深邃氛圍</li>
+          </ul>
+        </div>
+      </div>
+      <div class="osec">
+        <div class="dlabel">剪輯呈現</div>
+        <div class="lfbadge">
+          <div>
+            <div class="blabel">LONG FILM ｜ 8–10 MIN</div>
+            <div class="bdesc">個人品牌定調之作，穿插過去的舊照片或新聞畫面</div>
+          </div>
+        </div>
+        <div class="rrow">
+          <div class="rpill"><div class="rn">REEL 01</div><div class="rt">〈為什麼是無黨籍？〉</div><div class="rd">節奏明快，直接切入核心痛點</div></div>
+          <div class="rpill"><div class="rn">REEL 02</div><div class="rt">〈從黑道到牧師的真實對白〉</div><div class="rd">強烈的情緒張力片段</div></div>
+          <div class="rpill"><div class="rn">REEL 03</div><div class="rt">〈我想為台南做的一件事〉</div><div class="rd">溫馨且具象的願景</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="sec-intro">
+      <div class="sec-num">02</div>
+      <div class="sec-heading">辦公室側拍：選戰背後的真實</div>
+      <div class="sec-sub">16:00 – 17:30</div>
+    </div>
+    <div class="sblock">
+      <div class="stop">
+        <div class="tcol">
+          <div class="trange">16:00<br>17:30</div>
+          <div class="tdur">1.5 小時</div>
+          <div class="ttag">B-ROLL</div>
+        </div>
+        <div class="titcol">
+          <div class="stitle">辦公室側拍<br>選戰背後的真實</div>
+          <div class="stagline">這不是擺拍，是展示「準備好了」的專業</div>
+        </div>
+      </div>
+      <div class="sbody">
+        <div class="dcol">
+          <div class="dlabel">劇情大綱</div>
+          <div class="dtext">捕捉他在亂中有序的辦公室裡<strong>開會、接電話、劃掉行程表</strong>的樣子。</div>
+        </div>
+        <div class="dcol">
+          <div class="dlabel">角色引導</div>
+          <div class="dtext">當攝影機不存在。甚至可以拍到他因為焦慮而<strong>揉太陽穴</strong>的自然反應。</div>
+        </div>
+        <div class="dcol full">
+          <div class="dlabel">拍攝手法 ｜ 用途</div>
+          <ul class="dlist">
+            <li><strong>全手持拍攝</strong>，模擬紀錄片式晃動與臨場感，強調選戰的節奏感與迫切性</li>
+            <li>作為所有影片的<strong>空鏡素材（B-roll）</strong>，增加畫面的真實說服力</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="sec-intro">
+      <div class="sec-num">03</div>
+      <div class="sec-heading">社區抽獎活動：隱形的服務者</div>
+      <div class="sec-sub">19:00 – 20:00</div>
+    </div>
+    <div class="sblock">
+      <div class="stop">
+        <div class="tcol">
+          <div class="trange">19:00<br>20:00</div>
+          <div class="tdur">1 小時</div>
+          <div class="ttag">COMMUNITY</div>
+        </div>
+        <div class="titcol">
+          <div class="stitle">社區抽獎活動<br>隱形的服務者</div>
+          <div class="stagline">真實參與，讓行動說話</div>
+        </div>
+      </div>
+      <div class="sbody">
+        <div class="dcol full">
+          <div class="dlabel">B-roll 清單</div>
+          <ul class="dlist">
+            <li>在後台<strong>搬椅子、幫老人家找座位</strong>的「勞動感」</li>
+            <li>蹲在地上跟長輩說話，<strong>視線低於長輩</strong>的特寫</li>
+            <li>抽獎時在台下鼓掌，看著別人中獎時<strong>真誠的笑容</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nblock">
+        <div class="ntxt"><strong>引導：</strong>讓他在活動期間，跟工作人員一同協助活動，真實參與投入做事的樣子。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== DAY 2 ===== -->
+  <div class="day-section" id="d2">
+
+    <div class="sec-intro">
+      <div class="sec-num">01</div>
+      <div class="sec-heading">國小母親節表演：快閃與類父親視角</div>
+      <div class="sec-sub">07:20 – 08:20</div>
+    </div>
+    <div class="sblock">
+      <div class="stop">
+        <div class="tcol">
+          <div class="trange">07:20<br>08:20</div>
+          <div class="tdur">1 小時</div>
+          <div class="ttag">COMMUNITY</div>
+        </div>
+        <div class="titcol">
+          <div class="stitle">國小母親節表演<br>快閃與類父親視角</div>
+          <div class="stagline">平凡父親的側面，最有力量的畫面</div>
+        </div>
+      </div>
+      <div class="sbody">
+        <div class="dcol full">
+          <div class="dlabel">B-roll 清單</div>
+          <ul class="dlist">
+            <li>人群後方<strong>踮起腳尖</strong>用手機拍孩子表演的特寫（平凡父親的側面）</li>
+            <li>表演結束後，和孩子互動、<strong>遞水</strong>的自然動作</li>
+            <li>跟其他家長<strong>點頭示意、寒暄</strong>的畫面</li>
+          </ul>
+        </div>
+      </div>
+      <div class="nblock">
+        <div class="ntxt"><strong>對鏡頭說話：</strong>不需要對著鏡頭講政見。只要問他：「看到孩子表演，你會想到對於地區孩子的未來的什麼？」</div>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="sec-intro">
+      <div class="sec-num">02</div>
+      <div class="sec-heading">和媽媽去市場：台南在地的味道</div>
+      <div class="sec-sub">09:00 – 12:30 ｜ 含買菜到回家煮飯</div>
+    </div>
+    <div class="sblock">
+      <div class="stop">
+        <div class="tcol">
+          <div class="trange">09:00<br>12:30</div>
+          <div class="tdur">3.5 小時</div>
+          <div class="ttag">LIFESTYLE</div>
+        </div>
+        <div class="titcol">
+          <div class="stitle">和媽媽去市場<br>台南在地的味道</div>
+          <div class="stagline">台南式的互動，煙火氣的家</div>
+        </div>
+      </div>
+      <div class="sbody">
+        <div class="dcol">
+          <div class="dlabel">劇情大綱</div>
+          <div class="dtext">市場裡與攤商的寒暄、媽媽在耳邊的碎念、回到家後兩人一起處理食材的<strong>煙火氣</strong>。</div>
+        </div>
+        <div class="dcol">
+          <div class="dlabel">角色引導</div>
+          <div class="dtext">讓<strong>媽媽主導</strong>。媽媽的碎念是選民最真實的聲音，伯利牧師只要負責當那個「聽話的兒子」就好。</div>
+        </div>
+        <div class="dcol full">
+          <div class="dlabel">拍攝手法</div>
+          <ul class="dlist">
+            <li><strong>廣角鏡頭</strong>貼近拍攝市場的擁擠與熱鬧</li>
+            <li>廚房戲使用<strong>暖色調燈光</strong>，捕捉水蒸氣與切菜聲</li>
+          </ul>
+        </div>
+      </div>
+      <div class="osec">
+        <div class="dlabel">剪輯呈現</div>
+        <div class="lfbadge">
+          <div>
+            <div class="blabel">LONG FILM ｜ 5–7 MIN</div>
+            <div class="bdesc">以一道家常菜為媒介，帶出伯利對這塊土地的感情，以及家庭如何支撐他的參選</div>
+          </div>
+        </div>
+        <div class="rrow">
+          <div class="rpill"><div class="rn">REEL 01</div><div class="rt">〈市場裡的伯利牧師〉</div><div class="rd">看他如何自然地融入在地</div></div>
+          <div class="rpill"><div class="rn">REEL 02</div><div class="rt">〈媽媽的真心話〉</div><div class="rd">幽默或感人的母子吐槽</div></div>
+          <div class="rpill"><div class="rn">REEL 03</div><div class="rt">〈家的味道就是台南的味道〉</div><div class="rd">食物視覺與溫情語錄</div></div>
+        </div>
+      </div>
+      <div class="qblock">
+        <div class="dlabel">備選訪問媽媽問題</div>
+        <div class="qi">「伯利小時候最皮的一件事是什麼？那時候你有想過他會變牧師嗎？」</div>
+        <div class="qi">「他最落魄、最讓你擔心的那幾年，你是怎麼熬過來的？」</div>
+        <div class="qi">「他第一次跟你說他要參選議員時，你心裡第一個念頭是什麼？支持還是害怕？」</div>
+        <div class="qi">「現在看他在外面跑行程，你最想叮嚀他的一句話是什麼？」</div>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="sec-intro">
+      <div class="sec-num">03</div>
+      <div class="sec-heading">與太太的真誠問答：靈魂伴侶的直球對決</div>
+      <div class="sec-sub">13:00 – 15:30</div>
+    </div>
+    <div class="sblock">
+      <div class="stop">
+        <div class="tcol">
+          <div class="trange">13:00<br>15:30</div>
+          <div class="tdur">2.5 小時</div>
+          <div class="ttag">INTERVIEW</div>
+        </div>
+        <div class="titcol">
+          <div class="stitle">與太太的真誠問答<br>靈魂伴侶的直球對決</div>
+          <div class="stagline">太太不是附屬品，而是戰友</div>
+        </div>
+      </div>
+      <div class="sbody">
+        <div class="dcol">
+          <div class="dlabel">劇情大綱</div>
+          <div class="dtext">夫妻坐在沙發上，抽籤回答問題。包含：<strong>「當初你說要選，我有沒有想離婚？」</strong>等真實互動。</div>
+        </div>
+        <div class="dcol">
+          <div class="dlabel">拍攝手法</div>
+          <div class="dtext"><strong>對稱的構圖</strong>，穩定器拍攝。捕捉兩人互動的小動作（如握手）。</div>
+        </div>
+      </div>
+      <div class="osec">
+        <div class="dlabel">剪輯呈現</div>
+        <div class="lfbadge">
+          <div>
+            <div class="blabel">LONG FILM ｜ 6–8 MIN</div>
+            <div class="bdesc">展現參選對家庭的衝擊與共識，建立可靠的男人形象</div>
+          </div>
+        </div>
+        <div class="rrow">
+          <div class="rpill"><div class="rn">REEL 01</div><div class="rt">〈參選人老婆的真實心聲〉</div><div class="rd">犀利又充滿愛</div></div>
+          <div class="rpill"><div class="rn">REEL 02</div><div class="rt">〈我們最不合的地方〉</div><div class="rd">增加人性化的缺點，反而更迷人</div></div>
+          <div class="rpill"><div class="rn">REEL 03</div><div class="rt">〈默契大考驗〉</div><div class="rd">趣味活潑的快節奏內容</div></div>
+        </div>
+      </div>
+      <div class="nblock">
+        <div class="ntxt"><strong>備註：</strong>事先準備好問題庫和安排問題流程，並與備選團隊一同討論（<strong>盡可能不向拍攝者透露</strong>）。</div>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="sec-intro">
+      <div class="sec-num">04</div>
+      <div class="sec-heading">省躬國小 × 灣裡萬年殿：文化傳承的致敬</div>
+      <div class="sec-sub">17:00 – 19:00</div>
+    </div>
+    <div class="sblock">
+      <div class="stop">
+        <div class="tcol">
+          <div class="trange">17:00<br>19:00</div>
+          <div class="tdur">2 小時</div>
+          <div class="ttag">CULTURE</div>
+        </div>
+        <div class="titcol">
+          <div class="stitle">省躬國小 × 灣裡萬年殿<br>文化傳承的致敬</div>
+          <div class="stagline">不同信仰，同一個母親</div>
+        </div>
+      </div>
+      <div class="sbody">
+        <div class="dcol">
+          <div class="dlabel">切入點</div>
+          <div class="dtext">萬年殿是地方的信仰與情感核心。我們不拍「拜拜」，我們拍<strong>「尊重與聆聽」</strong>。</div>
+        </div>
+        <div class="dcol">
+          <div class="dlabel">拍攝手法</div>
+          <div class="dtext"><strong>長焦鏡頭遠觀</strong>，減少對活動的干擾，捕捉他最自然的側影。</div>
+        </div>
+      </div>
+      <div class="osec">
+        <div class="dlabel">輸出</div>
+        <div class="lfbadge">
+          <div>
+            <div class="blabel">SHORT FILM ｜ 1 支</div>
+            <div class="bdesc">強調「守護南區的傳統價值」，展現他作為無黨籍候選人，跨越隔閡與在地連結的能力</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function sw(id, el) {
+  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.day-tab, .nav-link').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('[onclick*="\'' + id + '\'"]').forEach(e => e.classList.add('active'));
+}
+</script>
+
+</body>
+</html>
